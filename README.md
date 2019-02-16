@@ -30,16 +30,23 @@ When you add a new project on CircleCI, a deployment key is automatically create
 To see the benefit of `vamp-kmt` we need the build pipeline for the services to trigger an automated canary-release to all the applications that depend on that service. To do that, the service builds need to push changes to this repository. That cannot be done using a read-only deployment key.
 
 You can manually add a read/write deployment key with the following steps:
-1. Create a ssh key pair by following the [GitHub instructions](https://help.github.com/articles/generating-ssh-keys/)  
-   **Note:** when you are asked to "Enter passphrase (empty for no passphrase)", do _**not**_ enter a passphrase.
+1. Create a ssh key pair by following the [GitHub instructions](https://help.github.com/articles/connecting-to-github-with-ssh/#generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)  
+   **Note:** when you are asked to "Enter passphrase (empty for no passphrase)", do _**not**_ enter a passphrase. You _**do not**_ need to add the key to your SSH agent
 2. Go to `https://github.com/you/vamp-kmt-examples/settings/keys` on GitHub and click **Add deploy key**
    * Enter `CircleCI` in the **Title** field
-   * Copy and paste the public key you just created into the **Key** field
+   * Copy and paste the public key you just created into the **Key** field  
+   _Linux:_ `xclip -sel clip < ~/.ssh/id_rsa.pub`  
+   _Mac:_ `pbcopy < ~/.ssh/id_rsa.pub`  
+   _Windows:_ `clip < ~/.ssh/id_rsa.pub`
    * Make sure **Allow write access** is set, then click **Add key**
 3. Go to `https://circleci.com/gh/you/sava-cart/edit#ssh` on CircleCI and and click **Add SSH Key**  
    **Note:** you are adding the key to the `sava-cart` project because we want the `sava-cart` build to push changes to `vamp-kmt-examples`.
    * Enter `github.com` in the **Hostname** field
-   * Copy and paste the private key you just created into the **Private Key** field
+   * Copy and paste the private key you just created into the **Private Key** field  
+   _Linux:_ `xclip -sel clip < ~/.ssh/id_rsa`  
+   _Mac:_ `pbcopy < ~/.ssh/id_rsa`  
+   _Windows:_ `clip < ~/.ssh/id_rsa`
    * Click **Add SSH Key**
+   * Make a note of the fingerprint, you will need it for the next step
 
 
