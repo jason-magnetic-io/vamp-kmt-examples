@@ -30,7 +30,7 @@ Fork the `sava-cart` [repo](https://github.com/magneticio/sava-cart)
    * Enter `GITHUB_EMAIL` in the **Name** field
    * Enter the email address you use for your GitHub account in the **Value** field
    * Click **Add Variable**
-* (Optional) Enable publishing the Docker images by setting the following environment variables
+* (Optional) To enable publishing of the Docker images, set the following environment variables
    * Add `PUBLISH_DOCKER_IMAGE` and set the value to `true`
    * Add `DOCKER_ORG` and set the value to name of your Docker Hub account username or organization
    * Add `DOCKER_USER` and set the value to name of your Docker Hub account username
