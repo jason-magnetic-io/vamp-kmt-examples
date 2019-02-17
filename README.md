@@ -15,14 +15,26 @@ Fork this repo by pressing the **Fork** button at the top right of this page
 Fork the `sava-cart` [repo](https://github.com/magneticio/sava-cart)
 
 ### Step 3: Setup the projects on CircleCI
+#### `vamp-kmt-examples`
 * Go to `https://circleci.com/add-projects/gh/you` on CircleCI and setup the `vamp-kmt-examples` project
 * Click the **Set Up Project** button next to `vamp-kmt-examples`
    * Make sure the **Operating System** is _Linux_
    * Scroll down and click the **Start building** button
-* Go back to `https://circleci.com/add-projects/gh/you` on CircleCI and setup the `sava-cart` project
+#### `sava-cart`
+* Go to `https://circleci.com/add-projects/gh/you` on CircleCI and setup the `sava-cart` project
 * Click the **Set Up Project** button next to `sava-cart`
    * Make sure the **Operating System** is _Linux_
    * Scroll down and click the **Start building** button
+* Go to `https://circleci.com/gh/you/sava-cart/edit#env-vars` on CircleCI
+* Click the **Add Variable** button
+   * Enter `GITHUB_EMAIL` in the **Name** field
+   * Enter the email address you use for your GitHub account in the **Value** field
+   * Click **Add Variable**
+* (Optional) Enable publishing the Docker images by setting the following environment variables
+   * Add `PUBLISH_DOCKER_IMAGE` and set the value to `true`
+   * Add `DOCKER_ORG` and set the value to name of your Docker Hub account username or organization
+   * Add `DOCKER_USER` and set the value to name of your Docker Hub account username
+   * Add `DOCKER_PASS` and set the value to name of your Docker Hub account password
 
 ### Step 4: Add a read/write deploy key for `vamp-kmt-examples`
 When you add a new project on CircleCI, a deployment key is automatically created in GitHub for your project. The deployment key is read-only, so CircleCI cannot push to your repository with the key.
