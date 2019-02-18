@@ -59,6 +59,11 @@ You can manually add a read/write deployment key with the following steps:
    _Mac:_ `pbcopy < ~/.ssh/id_rsa`  
    _Windows:_ `clip < ~/.ssh/id_rsa`
    * Click **Add SSH Key**
-   * Make a note of the fingerprint, you will need it for the next step
+   * Make a copy of the fingerprint, you will need it for the next step
 
+### Step 5: Add the SSH key `sava-cart` CircleCI config
+* Edit `sava-cart/.circleci/config.yml`
+   * On line 28, replace `"<your-fingerprint>"` with the fingerprint you copied in the previous step  
+   _For example_: replace `"<your-fingerprint>"` with `"ab:cd:ef:01:23:45:67:89:a0:b1:c2:d3:e4:f5:96:87"`
+* Commit and push your change to GitHub
 
