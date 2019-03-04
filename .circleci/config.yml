@@ -19,8 +19,9 @@ jobs:
               ext="${filename##*.}"
               base=$(basename "$filename" ."$ext")
               echo "$filename", "$basename"
+              vamp-kmt -A "$filename" -s services/ -e environments/ -o .
             done
-            vamp-kmt
+            ls -la
 
 workflows:
   version: 2
