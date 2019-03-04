@@ -1,0 +1,34 @@
+version: 2.1
+defaults: &defaults
+  docker:
+    - image: vampio/kmt:circleci-0.1.0
+jobs:
+  generate-k8s-artifacts:
+    <<: *defaults
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "68:e9:39:38:a9:73:a7:bd:05:dc:20:4e:a5:e2:9a:1c"
+      - run:
+          name: Calculate
+          command: |
+            service=sava-product
+            tag="${CIRCLE_TAG:1}"
+            service_def=vamp-kmt-examples/tutorial5/services/$service/$service.json
+            python3 vamp-kmt-examples/circleci/version-update/update_version.py -f $service_def -t $tag
+            cat $service_def
+
+workflows:
+  version: 2
+  publish-version:
+    jobs:
+      - generate-k8s-artifacts:
+        command: |
+          for filename in $1/*/*.{json,yaml,yml}; do
+            [ -e "$filename" ] || continue
+            ext="${filename##*.}"
+            base=$(basename "$filename" ."$ext")
+            echo "$filename", "$basename"
+            vamp-kmt
+          done
