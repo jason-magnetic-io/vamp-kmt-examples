@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Calculate
           command: |
-            for filename in $1/*/*.{json,yaml,yml}; do
+            for filename in applications/*/*.{json,yaml,yml}; do
               [ -e "$filename" ] || continue
               ext="${filename##*.}"
               base=$(basename "$filename" ."$ext")
