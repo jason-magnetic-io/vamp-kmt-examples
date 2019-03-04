@@ -14,14 +14,17 @@ jobs:
           name: Calculate
           command: |
             cd tutorial5
-            for filename in applications/*/*.{json,yaml,yml}; do
-              [ -e "$filename" ] || continue
-              ext="${filename##*.}"
-              base=$(basename "$filename" ."$ext")
-              echo "$filename", "$basename"
-              vamp-kmt -A "$filename" -s services/ -e environments/ -D ../k8s-templates/deployment-template.jsonnet -o .
+            for filepath in applications/*/*.{json,yaml,yml}; do
+              [ -e "$filepath" ] || continue
+              path=$(dirname "$filepath")
+              dirname=$(basename "$path")
+              ext="${filepath##*.}"
+              filename=$(basename "$filepath" ."$ext")
+              echo "$filepath", "$dirname", "$filename"
+              vamp-kmt -A "$filepath" -s services/ -e environments/ -D ../k8s-templates/deployment-template.jsonnet -o $subdir
             done
             ls -la
+            ls -la $subdir
 
 workflows:
   version: 2
