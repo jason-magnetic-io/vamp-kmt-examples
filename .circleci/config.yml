@@ -19,7 +19,7 @@ jobs:
               ext="${filename##*.}"
               base=$(basename "$filename" ."$ext")
               echo "$filename", "$basename"
-              vamp-kmt -A "$filename" -s services/ -e environments/ -o .
+              vamp-kmt -A "$filename" -s services/ -e environments/ -D ../k8s-templates/deployment-template.jsonnet -o .
             done
             ls -la
 
