@@ -1,7 +1,7 @@
 version: 2.1
 defaults: &defaults
   docker:
-    - image: vampio/kmt:circleci-0.1.0
+    - image: vampio/kmt:circleci-latest
 jobs:
   generate-k8s-artifacts:
     <<: *defaults
