@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Calculate
           command: |
-            ls applications/
+            cd tutorial5
             for filename in applications/*/*.{json,yaml,yml}; do
               [ -e "$filename" ] || continue
               ext="${filename##*.}"
