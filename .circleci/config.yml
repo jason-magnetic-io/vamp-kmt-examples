@@ -13,13 +13,14 @@ jobs:
       - run:
           name: Calculate
           command: |
+            ls applications/
             for filename in applications/*/*.{json,yaml,yml}; do
               [ -e "$filename" ] || continue
               ext="${filename##*.}"
               base=$(basename "$filename" ."$ext")
               echo "$filename", "$basename"
-              vamp-kmt
             done
+            vamp-kmt
 
 workflows:
   version: 2
