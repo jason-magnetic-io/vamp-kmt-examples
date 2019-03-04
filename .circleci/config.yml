@@ -13,22 +13,16 @@ jobs:
       - run:
           name: Calculate
           command: |
-            service=sava-product
-            tag="${CIRCLE_TAG:1}"
-            service_def=vamp-kmt-examples/tutorial5/services/$service/$service.json
-            python3 vamp-kmt-examples/circleci/version-update/update_version.py -f $service_def -t $tag
-            cat $service_def
+            for filename in $1/*/*.{json,yaml,yml}; do
+              [ -e "$filename" ] || continue
+              ext="${filename##*.}"
+              base=$(basename "$filename" ."$ext")
+              echo "$filename", "$basename"
+              vamp-kmt
+            done
 
 workflows:
   version: 2
   publish-version:
     jobs:
       - generate-k8s-artifacts:
-        command: |
-          for filename in $1/*/*.{json,yaml,yml}; do
-            [ -e "$filename" ] || continue
-            ext="${filename##*.}"
-            base=$(basename "$filename" ."$ext")
-            echo "$filename", "$basename"
-            vamp-kmt
-          done
