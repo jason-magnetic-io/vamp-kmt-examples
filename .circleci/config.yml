@@ -25,4 +25,4 @@ workflows:
   version: 2
   publish-version:
     jobs:
-      - generate-k8s-artifacts:
+      - generate-k8s-artifacts
