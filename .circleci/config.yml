@@ -21,10 +21,11 @@ jobs:
               ext="${filepath##*.}"
               filename=$(basename "$filepath" ."$ext")
               echo "$filepath", "$dirname", "$filename"
+              mkdir $dirname
               vamp-kmt -A "$filepath" -s services/ -e environments/ -D ../k8s-templates/deployment-template.jsonnet -o $dirname
+              ls -la $dirname
             done
             ls -la
-            ls -la $dirname
 
 workflows:
   version: 2
